@@ -34,6 +34,7 @@ export const Movie = styled.div`
     font-wheight: bold;
     font-size: 150%;
     margin-top: 1rem;
+    text-align: center; 
     }
 
     a:hover{

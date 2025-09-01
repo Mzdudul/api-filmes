@@ -1,27 +1,19 @@
-import React from "react";
+import React, { use } from "react";
 import { Container, Movie, MovieList } from "./styles";
-import spiderman from "../Home/img/spiderman.webp"
+import { useEffect } from "react";
+import { useState } from "react";
+import { API_KEY } from "./config/key";
 
 function Home() {
+    const image_path = "https://image.tmdb.org/t/p/w500";
+    
+    const [movies, setMovies] = useState([]);
 
-    const movies = [
-        {
-            id: 1,
-            title: 'Spider Man',
-            image_url: spiderman
-        },
-        {
-            id: 2,
-            title: 'Spider Man',
-            image_url: spiderman
-        },
-        {
-            id: 3,
-            title: 'Spider Man',
-            image_url: spiderman
-        }
-
-    ]
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=EN-us&PAGE=1`)
+        .then((response) => response.json())
+        .then((data) => setMovies(data.results))
+    }, []);
 
     return (
         <Container>
@@ -30,7 +22,7 @@ function Home() {
                 {movies.map(movie =>{
                     return(
                         <Movie key={movie.id}>
-                            <a href=""><img src={movie.image_url} alt={movie.title} /></a>
+                            <a href=""><img src={`${image_path}${movie.poster_path}`} alt={movie.title} /></a>
                             <span>{movie.title}</span>
                         </Movie>
                     )
