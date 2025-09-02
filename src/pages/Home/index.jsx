@@ -2,10 +2,11 @@ import React, { use } from "react";
 import { Container, Movie, MovieList } from "./styles";
 import { useEffect } from "react";
 import { useState } from "react";
-import { API_KEY } from "./config/key";
+import { API_KEY } from "../../config/key";
+import { Link } from "react-router-dom";
+import { image_path } from "../../config/img";
 
 function Home() {
-    const image_path = "https://image.tmdb.org/t/p/w500";
     
     const [movies, setMovies] = useState([]);
 
@@ -22,7 +23,7 @@ function Home() {
                 {movies.map(movie =>{
                     return(
                         <Movie key={movie.id}>
-                            <a href=""><img src={`${image_path}${movie.poster_path}`} alt={movie.title} /></a>
+                            <Link to={`/details/${movie.id}`}><img src={`${image_path}${movie.poster_path}`} alt={movie.title} /></Link>
                             <span>{movie.title}</span>
                         </Movie>
                     )
